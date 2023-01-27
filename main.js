@@ -25,11 +25,13 @@ function createNewUser() {
     inputDate: +birthFn.substring(0, 2),
     inputMonth: +birthFn.substring(3, 5),
     inputYear: +birthFn.substring(6, 10),
+
     getLogin: function () {
       return (
         newUser.firstName[0].toLowerCase() + newUser.lastName.toLowerCase()
       );
     },
+
     getAge() {
       let now = new Date();
       let today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
@@ -46,6 +48,7 @@ function createNewUser() {
       }
       return age;
     },
+
     getPassword() {
       return (
         newUser.firstName[0].toUpperCase() +
@@ -54,6 +57,7 @@ function createNewUser() {
       );
     },
   };
+
   Object.defineProperty(newUser, "firstName", {
     value: name,
     writable: false,
@@ -62,6 +66,7 @@ function createNewUser() {
     value: surname,
     writable: false,
   });
+
   console.log(newUser.getLogin());
   console.log(newUser.getAge());
   console.log(newUser.getPassword());
