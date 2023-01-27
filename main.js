@@ -22,9 +22,7 @@ function createNewUser() {
   newUser = {
     firstName: name,
     lastName: surname,
-    inputDate: +birthFn.substring(0, 2),
-    inputMonth: +birthFn.substring(3, 5),
-    inputYear: +birthFn.substring(6, 10),
+    birthday: birthFn,
 
     getLogin: function () {
       return (
@@ -35,15 +33,14 @@ function createNewUser() {
     getAge() {
       let now = new Date();
       let today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-      let birthday = new Date(
-        newUser.inputYear,
-        newUser.inputMonth,
-        newUser.inputDate
-      );
-      let age = today.getFullYear() - birthday.getFullYear();
-      let month = today.getMonth() + 1 - birthday.getMonth();
-      let day = today.getDay() - birthday.getDay();
-      if (month < 0 || (month === 0 && today.getDate() < birthday.getDate())) {
+      let inputDate = +newUser.birthday.substring(0, 2);
+      let inputMonth = +newUser.birthday.substring(3, 5);
+      let inputYear = +newUser.birthday.substring(6, 10);
+      let birthDate = new Date(inputYear, inputMonth, inputDate);
+      let age = today.getFullYear() - birthDate.getFullYear();
+      let month = today.getMonth() + 1 - birthDate.getMonth();
+      let day = today.getDay() - birthDate.getDay();
+      if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate())) {
         age--;
       }
       return age;
@@ -53,7 +50,7 @@ function createNewUser() {
       return (
         newUser.firstName[0].toUpperCase() +
         newUser.lastName.toLowerCase() +
-        newUser.inputYear
+        newUser.birthday.substring(6, 10)
       );
     },
   };
@@ -73,4 +70,3 @@ function createNewUser() {
 }
 
 createNewUser();
-
